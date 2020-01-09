@@ -1,0 +1,5 @@
+/* .listaLibros {
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(6, 1fr);
+  grid-template-areas: free free free;
+} */

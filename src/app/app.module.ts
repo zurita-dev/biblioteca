@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LibroListComponent } from './components/libros/libro-list/libro-list.component';
 import { AutorListComponent } from './components/autor/autor-list/autor-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AutorListComponent } from './components/autor/autor-list/autor-list.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
