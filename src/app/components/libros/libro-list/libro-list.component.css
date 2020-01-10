@@ -3,3 +3,19 @@
   grid-template: repeat(6, 1fr) / repeat(6, 1fr);
   grid-template-areas: free free free;
 } */
+
+table {
+    width: 100%;
+    min-width: 700px;
+    max-width: 1300px;
+}
+
+.listaLibros {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .listaLibros {
+        overflow: scroll;
+    }
+}

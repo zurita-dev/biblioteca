@@ -1,7 +1,7 @@
 <div class="contenedor">
-    <div class="listaLibros">
-        <h2>Libros List </h2>
 
+    <h2>Libros List </h2>
+    <div class="listaLibros">
         <table mat-table [dataSource]="librosTemporales" class="mat-elevation-z8">
             <!-- Position Column -->
             <ng-container matColumnDef="titulo">
@@ -18,7 +18,7 @@
             <!-- Weight Column -->
             <ng-container matColumnDef="anio">
                 <th mat-header-cell *matHeaderCellDef> Año </th>
-                <td mat-cell *matCellDef="let element"> {{element.anio | date }} </td>
+                <td mat-cell *matCellDef="let element"> {{element.anio.seconds | date:'dd/MM/yyyy' }} </td>
             </ng-container>
 
             <!-- Symbol Column -->
