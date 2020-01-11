@@ -37,6 +37,14 @@ newLibro(libro){
   return this.db.collection('libro').add(libro);
 }
 
+updateLibro(libroId, libro){
+    return this.db.collection('libro').doc(libroId).set(libro);
+}
+
+deleteLibro(libroId){
+  return this.db.collection('libro').doc(libroId).delete();
+}
+
 
 getNewLibro(): libro{
   return {

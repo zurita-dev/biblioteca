@@ -19,10 +19,10 @@
                 <tr *ngFor="let book of listLibros">
                     <td>{{book.data.titulo}}</td>
                     <td>{{book.data.autor}}</td>
-                    <td>{{book.data.anio}}</td>
+                    <td>{{book.data.anio | date:'dd/MM/yyyy'}}</td>
                     <td>{{book.data.descripcion}}</td>
-                    <td> <button mat-raised-button (click)="dialogLibro(book.data)" color="primary">Edit</button>
-                        <button mat-raised-button color="warn">Delete</button></td>
+                    <td> <button mat-raised-button (click)="dialogLibro(book)" color="primary">Edit</button>
+                        <button mat-raised-button (click)="deleteLibro(book.id)" color="warn">Delete</button></td>
                 </tr>
             </tbody>
         </table>

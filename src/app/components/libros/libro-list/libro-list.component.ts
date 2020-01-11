@@ -73,10 +73,19 @@ export class LibroListComponent implements OnInit {
     // });
   }
 
-  dialogLibro(book?:libro){
+  deleteLibro(libroId){
+    this.libroService.deleteLibro(libroId).then((res) => {
+      console.log('Borrado exitoso', res);
+    },
+    (err) => {
+      console.log('Error al borrar: ', err);
+    })
+  }
+
+  dialogLibro(book?){
       const dialogRef = this.dialog.open(LibroCreateComponent, {
         width: '250px',
-         data: book? book : this.libroService.getNewLibro()
+         data: book? JSON.parse(JSON.stringify(book)) : this.libroService.getNewLibro()
       });
   }
 }

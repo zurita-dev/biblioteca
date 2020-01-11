@@ -3,17 +3,17 @@
         <h5>{{title}}</h5>
     </div>
     <div class="contenedorItem">
-        <input type="text" matInput [(ngModel)]="libro.titulo" placeholder="Título">
+        <label for="libro_titulo">Título</label>
+        <input type="text" id="libro_titulo" matInput [(ngModel)]="libro.titulo" placeholder="Título">
     </div>
     <div class="contenedorItem">
-
-        <input type="text" matInput [(ngModel)]="libro.autor" placeholder="Autor">
-
+        <label for="libro_autor">Autor</label>
+        <input type="text" id="libro_autor" matInput [(ngModel)]="libro.autor" placeholder="Autor">
     </div>
     <!-- <input type="date" matInput [(ngModel)]="libro.anio" placeholder="Año"> -->
     <div class="contenedorItem">
 
-        <div>
+        <div style="display: flex;">
             <input matInput [(ngModel)]="libro.anio" [matDatepicker]="picker" placeholder="Choose a date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker></mat-datepicker>
@@ -30,10 +30,9 @@
 
     </div>
     <div class="contenedorItem" mat-dialog-actions>
-
         <button mat-button (click)="onNoClick()">No Thanks</button>
-        <button mat-button (click)="Save()">Ok</button>
-
+        <button mat-button *ngIf="!flagEdit" (click)="Save()">Agregar</button>
+        <button mat-button *ngIf="flagEdit" (click)="updateLibro()">Actualizar</button>
     </div>
 
 </div>
