@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+html, body  
+    height: 100%
+body  
+    margin: 0
+    font-family: Roboto, "Helvetica Neue", sans-serif
+    font-size: 16px
+h1
+    color: blue
+.ContainerCreateBook
+    display: grid
+    grid-template: repeat(6, 1fr)/(1fr)
+    gap: 20px 0px
+    // display: grid
+    // grid-template: repeat(6, 1fr)/repeat(3, 1fr)
+    // grid-template-areas: "title title title"
+    // "titulo inputTitulo inputTitulo"
+    // "autor inputAutor inputAutor"
+    // "anio inputDate inputDate"
+    // "descripcion inputDescript inputDescript"
+.contenedorItem:nth-of-type(1)
+    text-align: center

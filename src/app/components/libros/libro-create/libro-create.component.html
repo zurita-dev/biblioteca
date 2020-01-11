@@ -1,1 +1,39 @@
-<p>libro-create works!</p>
+<div class="ContainerCreateBook">
+    <div class="contenedorItem">
+        <h5>{{title}}</h5>
+    </div>
+    <div class="contenedorItem">
+        <input type="text" matInput [(ngModel)]="libro.titulo" placeholder="Título">
+    </div>
+    <div class="contenedorItem">
+
+        <input type="text" matInput [(ngModel)]="libro.autor" placeholder="Autor">
+
+    </div>
+    <!-- <input type="date" matInput [(ngModel)]="libro.anio" placeholder="Año"> -->
+    <div class="contenedorItem">
+
+        <div>
+            <input matInput [(ngModel)]="libro.anio" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="contenedorItem">
+
+        <input matInput [(ngModel)]="libro.descripcion" placeholder="Descripción">
+
+    </div>
+    <div class="contenedorItem" mat-dialog-actions>
+
+        <button mat-button (click)="onNoClick()">No Thanks</button>
+        <button mat-button (click)="Save()">Ok</button>
+
+    </div>
+
+</div>

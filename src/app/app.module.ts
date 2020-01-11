@@ -13,26 +13,43 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { MatTableModule } from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+import { LibroCreateComponent } from './components/libros/libro-create/libro-create.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LibroListComponent,
     AutorListComponent,
+    LibroCreateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAnalyticsModule, // dynamically imports firebase/analytics
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    // AngularFireAnalyticsModule, // dynamically imports firebase/analytics
+    AngularFirestoreModule, 
+    AngularFireAuthModule, 
+    AngularFireStorageModule,
     AngularFireDatabaseModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    MatButtonModule,
   ],
-  providers: [],
+  entryComponents: [
+    LibroCreateComponent
+  ],
+  providers: [MatDatepickerModule,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

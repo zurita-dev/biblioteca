@@ -1,34 +1,80 @@
 <div class="contenedor">
 
-    <h2>Libros List </h2>
+    <header>
+        <h2>Libros List </h2> <button mat-button (click)="dialogLibro()">Agregar</button> </header>
+
+
     <div class="listaLibros">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Año</th>
+                    <th>Descripción</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of listLibros">
+                    <td>{{book.data.titulo}}</td>
+                    <td>{{book.data.autor}}</td>
+                    <td>{{book.data.anio}}</td>
+                    <td>{{book.data.descripcion}}</td>
+                    <td> <button mat-raised-button (click)="dialogLibro(book.data)" color="primary">Edit</button>
+                        <button mat-raised-button color="warn">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+    <!-- <div class="listaLibros">
         <table mat-table [dataSource]="librosTemporales" class="mat-elevation-z8">
-            <!-- Position Column -->
+
             <ng-container matColumnDef="titulo">
-                <th mat-header-cell *matHeaderCellDef> Tìtulo </th>
+                <th mat-header-cell *matHeaderCellDef> T&iacute;tulo </th>
                 <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
             </ng-container>
 
-            <!-- Name Column -->
+            <ng-container>
+                <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+            </ng-container>
+
+
+
             <ng-container matColumnDef="autor">
                 <th mat-header-cell *matHeaderCellDef> Autor </th>
                 <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
+
             <ng-container matColumnDef="anio">
                 <th mat-header-cell *matHeaderCellDef> Año </th>
                 <td mat-cell *matCellDef="let element"> {{element.anio.seconds | date:'dd/MM/yyyy' }} </td>
             </ng-container>
 
-            <!-- Symbol Column -->
+
             <ng-container matColumnDef="descripcion">
-                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
                 <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
             </ng-container>
+            <ng-container matColumnDef="">
+                <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <button mat-raised-button color="primary">Edit</button>
+                <button mat-raised-button color="warn">Delete</button>
+               
+            </ng-container>
+          
+
+
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-    </div>
+    </div> -->
 </div>
