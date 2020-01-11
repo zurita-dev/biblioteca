@@ -1,1 +1,28 @@
-<p>autor-create works!</p>
+<div class="ContainerCreateBook">
+    <div class="contenedorItem">
+        <h5>{{title}}</h5>
+    </div>
+    <div class="contenedorItem">
+        <label for="libro_titulo">Nombre</label>
+        <input type="text" id="libro_nombre" matInput [(ngModel)]="autor.nombre" placeholder="Nombre">
+    </div>
+    <div class="contenedorItem">
+        <label for="libro_nacionalidad">Nacionalidad</label>
+        <input type="text" id="libro_nacionalidad" matInput [(ngModel)]="autor.nacionalidad" placeholder="Naciolaidad">
+    </div>
+    <!-- <input type="date" matInput [(ngModel)]="libro.anio" placeholder="Año"> -->
+    <div class="contenedorItem form-group">
+        <div style="display: flex;">
+            <input matInput [(ngModel)]="autor.anio" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </div>
+    </div>
+
+    <div class="contenedorItem" mat-dialog-actions>
+        <button mat-button *ngIf="!flagEdit" (click)="Save()">Agregar</button>
+        <button mat-button *ngIf="flagEdit" (click)="updateAutor()">Actualizar</button>
+        <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
+    </div>
+
+</div>

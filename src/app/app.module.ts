@@ -18,8 +18,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 import { LibroCreateComponent } from './components/libros/libro-create/libro-create.component';
 import { FormsModule } from '@angular/forms';
+import { AutorCreateComponent } from './components/autor/autor-create/autor-create.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     LibroListComponent,
     AutorListComponent,
     LibroCreateComponent,
+    AutorCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,10 +47,12 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule ,
+    MatIconModule,
     MatButtonModule,
   ],
   entryComponents: [
-    LibroCreateComponent
+    LibroCreateComponent,
+    AutorCreateComponent
   ],
   providers: [MatDatepickerModule,],
   bootstrap: [AppComponent]
