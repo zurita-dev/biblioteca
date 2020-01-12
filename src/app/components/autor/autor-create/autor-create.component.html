@@ -1,27 +1,56 @@
-<div class="ContainerCreateBook">
+<div class="ContainerDialog">
     <div class="contenedorItem">
         <h5>{{title}}</h5>
     </div>
+
     <div class="contenedorItem">
-        <label for="libro_titulo">Nombre</label>
-        <input type="text" id="libro_nombre" matInput [(ngModel)]="autor.nombre" placeholder="Nombre">
-    </div>
-    <div class="contenedorItem">
-        <label for="libro_nacionalidad">Nacionalidad</label>
-        <input type="text" id="libro_nacionalidad" matInput [(ngModel)]="autor.nacionalidad" placeholder="Naciolaidad">
-    </div>
-    <!-- <input type="date" matInput [(ngModel)]="libro.anio" placeholder="Año"> -->
-    <div class="contenedorItem form-group">
-        <div style="display: flex;">
-            <input matInput [(ngModel)]="autor.anio" [matDatepicker]="picker" placeholder="Choose a date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #picker></mat-datepicker>
+        <!-- <div class="form-group">
+            <label class="form__label" for="autor_nombre">Nombre</label>
+            <input type="text" class="contenedorItem__input" id="autor_nombre" matInput [(ngModel)]="autor.nombre" placeholder="Nombre">
+        </div> -->
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="material-icons">
+                    perm_identity
+                    </i></div>
+            </div>
+            <input type="text" [(ngModel)]="autor.nombre" class="form-control" id="inlineFormInputGroup" placeholder="Nombre">
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+            </div>
+            <input type="text" [(ngModel)]="autor.nacionalidad" class="form-control" id="inlineFormInputGroup" placeholder="Nacionalidad">
+        </div>
+
+
+        <!-- <div class="form-group">
+            <label class="form__label" for="autor_nacionalidad">Nacionalidad</label>
+            <input type="text" class="contenedorItem__input" id="autor_nacionalidad" matInput [(ngModel)]="autor.nacionalidad" placeholder="Nacionalidad">
+        </div> -->
+
+        <!-- <input type="date" matInput [(ngModel)]="libro.anio" placeholder="Año"> -->
+        <div class="form-group">
+            <label class="form__label" for="autor_fnacimiento">Fecha de nacimiento</label>
+            <div class="form-group">
+                <input matInput id="autor_fnacimiento" class="nacimiento" [(ngModel)]="autor.anio" [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
         </div>
     </div>
 
-    <div class="contenedorItem" mat-dialog-actions>
-        <button mat-button *ngIf="!flagEdit" (click)="Save()">Agregar</button>
-        <button mat-button *ngIf="flagEdit" (click)="updateAutor()">Actualizar</button>
+    <div class="contenedorItem footer">
+        <button mat-raised-button color="primary" *ngIf="!flagEdit" (click)="Save()">Agregar</button>
+        <button mat-raised-button color="primary" *ngIf="flagEdit" (click)="updateAutor()">Actualizar</button>
         <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
     </div>
 

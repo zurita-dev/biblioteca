@@ -3,8 +3,15 @@
     <header>
         <h2>Autores </h2>
     </header>
-    <div class="listaAutores">
+    <div class="search">
+        <input type="search" placeholder="Buscar autor">
+        <button type="button" class="btn btn-info"><i class="material-icons">
+            search
+            </i></button>
+    </div>
+    <div class="containerTable">
         <table class="table table-hover">
+
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -18,14 +25,17 @@
                     <td>{{autorItem.data.nombre}}</td>
                     <td>{{autorItem.data.nacionalidad}}</td>
                     <td>{{autorItem.data.anio | date:'dd/MM/yyyy'}}</td>
-                    <td class="botonera"><button mat-raised-button (click)="dialogAutor(autorItem)" color="primary">Edit</button>
-                        <button mat-raised-button (click)="deleteAutor(autorItem.id)" color="warn">Delete</button></td>
+                    <td class="footer">
+                        <button mat-raised-button (click)="dialogAutor(autorItem)" color="primary"><i class="material-icons">
+                            edit
+                            </i></button>
+                        <button mat-raised-button (click)="deleteAutor(autorItem.id)" color="warn"><i class="material-icons">
+                            delete
+                            </i></button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-
 </div>
 <div class="float mat-elevation-z8" (click)="dialogAutor()">
     <!-- <i class="fa fa-plus my-float"></i> -->
