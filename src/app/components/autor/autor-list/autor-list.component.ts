@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AutorCreateComponent } from '../autor-create/autor-create.component';
 import {faSortAlphaDown, faSortNumericDownAlt} from '@fortawesome/free-solid-svg-icons';
 import { autorConId, autor } from '../models/autor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-autor-list',
@@ -20,7 +21,7 @@ export class AutorListComponent implements OnInit {
   // icon awesome
   faSortAlphaDown = faSortAlphaDown
   faSortNumericDownAlt = faSortNumericDownAlt
-  constructor(private autorService: AutorService, public dialog: MatDialog) { }
+  constructor(private toastr: ToastrService, private autorService: AutorService, public dialog: MatDialog) { }
 
   
   ngOnInit() {
@@ -61,12 +62,14 @@ export class AutorListComponent implements OnInit {
   }
 
   busquedaxFiltro(){
+    this.porNacionalidad = !this.porNacionalidad;
+    // revisamos el filtro por el que se realizará la busqueda
     if(this.porNacionalidad == true){
-       this.placeholderSearch = "Por Nombre";
+       this.placeholderSearch = "Por Nacionalidad";
       }else{
-        this.placeholderSearch = "Por Nacionalidad";
+        this.placeholderSearch = "Por Nombre";
       }
-      this.porNacionalidad = !this.porNacionalidad;
+      
   }
 
   filtrarPor(idCase){
@@ -84,10 +87,10 @@ export class AutorListComponent implements OnInit {
 
   deleteAutor(AutorId){
     this.autorService.deleteItem(AutorId).then((res) => {
-      console.log('Borrado exitoso', res);
+      this.toastr.success('Autor eliminado', 'Éxito');
     },
     (err) => {
-      console.log('Error al borrar: ', err);
+      this.toastr.error('Autor no pudo ser eliminado', 'Error');
     })
   }
 

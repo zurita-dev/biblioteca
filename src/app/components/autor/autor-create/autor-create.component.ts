@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { autor } from '../models/autor';
 import { AutorService } from '../services/autor.service';
 import {faGlobe,faUserTie,faBirthdayCake} from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-autor-create',
@@ -20,7 +21,7 @@ autor:autor;
   faBirthdayCake = faBirthdayCake;
   //  --- FontAwesomeIcons ---
 
-  constructor(private autorService:AutorService, public dialogRef: MatDialogRef<AutorCreateComponent>,
+  constructor(private toastr: ToastrService ,private autorService:AutorService, public dialogRef: MatDialogRef<AutorCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit() {
@@ -44,15 +45,16 @@ autor:autor;
     if(this.verificarCamposAutor(this.autor) == true){
       this.formatearFecha(this.autor); 
           // se inserta el autor en la bd y esperamos el resultado.
-          this.autorService.createItem(this.autor).then((res)=>{
-            console.log('Éxito', res);
+          this.autorService.createItem(this.autor).then(
+            (res)=>{
+            this.toastr.success('Autor guardado', 'Éxito');
             this.cerrarDialog();
           },
           (error)=> {
-            console.log('Error: ', error);
+            this.toastr.error('Autor no pudo ser guardado', 'Error');
           })
     }else{
-      console.log('Todos los campos deben ser correctos.');
+      this.toastr.error('No puede haber campos vacios', 'Error');
     }
     
   }
@@ -66,13 +68,20 @@ autor:autor;
   }
 
   updateAutor(){
-    this.formatearFecha(this.autor);
-    this.autorService.updateItem(this.data.id,this.autor).then((res)=>{
-      console.log('Éxito', res);
-   },
-   (error)=> {
-     console.log('Error: ', error);
-   })
+    if(this.verificarCamposAutor(this.autor) == true){
+      this.formatearFecha(this.autor);
+      this.autorService.updateItem(this.data.id,this.autor).then((res)=>{
+        this.toastr.success('Autor actualizado', 'Éxito');
+        this.cerrarDialog();
+      },
+        (error)=> {
+          this.toastr.error('Autor no pudo ser actualizado', 'Error');
+        })
+    }else{
+      this.toastr.error('No puede haber campos vacios', 'Error');
+    }
+
+    
   }
   
   cerrarDialog(): void {

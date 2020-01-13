@@ -26,6 +26,7 @@ import { LibroCreateComponent } from './components/libros/libro-create/libro-cre
 import { FormsModule } from '@angular/forms';
 import { AutorCreateComponent } from './components/autor/autor-create/autor-create.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     FormsModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     // AngularFireAnalyticsModule, // dynamically imports firebase/analytics
     AngularFirestoreModule, 

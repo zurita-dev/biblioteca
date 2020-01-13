@@ -18,6 +18,10 @@
 
             <thead>
                 <tr>
+                    <!-- Las busquedas corresponden a los filtros, 1 = nombre, 2, Nacionalidad, 3 F. nacimiento
+                    de esta manera podemos realizar el ordenamiento por el filtro que sea seleccinado -->
+                    <!-- Se añade una clase active al th correspondiente, de acuerdo al valor seteado en la variable estadoBusqueda -->
+                    <!-- Los iconos se muestran y ocultan de esa manera -->
                     <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 1}" (click)="filtrarPor(1)">
                         Nombre<span class="ml-1" *ngIf="estadoBusqueda === 1"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
                     </th>
@@ -35,7 +39,9 @@
                     <td>{{autorItem.data.nombre}}</td>
                     <td>{{autorItem.data.nacionalidad}}</td>
                     <td>{{autorItem.data.anio | date:'dd/MM/yyyy'}}</td>
+                    <!-- pipe utilizado para darle formato de milisegundos a fecha -->
                     <td class="footer">
+                        <!-- las funciones toman el parametro que tega autorItem -->
                         <button mat-raised-button (click)="dialogAutor(autorItem)" color="primary"><i class="material-icons">
                             edit
                             </i></button>
@@ -47,6 +53,7 @@
         </table>
     </div>
 </div>
+<!-- boton flotante  -->
 <div class="float mat-elevation-z8" (click)="dialogAutor()">
     <!-- <i class="fa fa-plus my-float"></i> -->
     <i class="material-icons">
