@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+// Imports material
 import { MatTableModule } from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -19,9 +20,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+// End imports material
 import { LibroCreateComponent } from './components/libros/libro-create/libro-create.component';
 import { FormsModule } from '@angular/forms';
 import { AutorCreateComponent } from './components/autor/autor-create/autor-create.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +40,7 @@ import { AutorCreateComponent } from './components/autor/autor-create/autor-crea
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    FontAwesomeModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     // AngularFireAnalyticsModule, // dynamically imports firebase/analytics
@@ -49,6 +55,7 @@ import { AutorCreateComponent } from './components/autor/autor-create/autor-crea
     MatNativeDateModule ,
     MatIconModule,
     MatButtonModule,
+    MatSlideToggleModule,
   ],
   entryComponents: [
     LibroCreateComponent,

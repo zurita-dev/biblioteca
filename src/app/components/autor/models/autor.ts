@@ -3,3 +3,8 @@ export interface autor {
     nacionalidad: string;
     anio: Date;
 }
+
+export interface autorConId{
+    idAutor: string;
+    autor: autor;
+}

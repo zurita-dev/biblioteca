@@ -11,18 +11,32 @@
 
         <div class="input-group">
             <div class="input-group-prepend">
-                <div class="input-group-text"><i class="material-icons">
-                    perm_identity
-                    </i></div>
+                <div class="input-group-text">
+                    <fa-icon [icon]="faUserTie"></fa-icon>
+                </div>
             </div>
-            <input type="text" [(ngModel)]="autor.nombre" class="form-control" id="inlineFormInputGroup" placeholder="Nombre">
+            <input type="text" [(ngModel)]="autor.nombre" class="form-control" placeholder="Nombre">
         </div>
 
         <div class="input-group">
             <div class="input-group-prepend">
-                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                <div class="input-group-text">
+                    <fa-icon [icon]="faGlobe"></fa-icon>
+                </div>
             </div>
-            <input type="text" [(ngModel)]="autor.nacionalidad" class="form-control" id="inlineFormInputGroup" placeholder="Nacionalidad">
+            <input type="text" [(ngModel)]="autor.nacionalidad" class="form-control" placeholder="Nacionalidad">
+        </div>
+
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <fa-icon [icon]="faBirthdayCake"></fa-icon>
+                </div>
+            </div>
+            <input type="text" class="form-control nacimiento" [(ngModel)]="autor.anio" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle class="btn-icon" matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
         </div>
 
 
@@ -32,20 +46,16 @@
         </div> -->
 
         <!-- <input type="date" matInput [(ngModel)]="libro.anio" placeholder="Año"> -->
-        <div class="form-group">
+
+
+        <!-- <div class="form-group">
             <label class="form__label" for="autor_fnacimiento">Fecha de nacimiento</label>
             <div class="form-group">
                 <input matInput id="autor_fnacimiento" class="nacimiento" [(ngModel)]="autor.anio" [matDatepicker]="picker" placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #picker></mat-datepicker>
             </div>
-        </div>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text">@</div>
-            </div>
-            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-        </div>
+        </div> -->
     </div>
 
     <div class="contenedorItem footer">

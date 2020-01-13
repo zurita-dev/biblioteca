@@ -4,19 +4,29 @@
         <h2>Autores </h2>
     </header>
     <div class="search">
-        <input type="search" placeholder="Buscar autor">
-        <button type="button" class="btn btn-info"><i class="material-icons">
-            search
-            </i></button>
+        <div class="input-group searchItem">
+            <input type="search" [placeholder]=placeholderSearch [(ngModel)]="searchName">
+            <button mat-raised-button (click)="getAutorBy()"><i class="material-icons">search</i></button>
+        </div>
+
+        <mat-slide-toggle class="searchItem" (change)="busquedaxFiltro()" [checked]="porNacionalidad">
+            Nacionalidad
+        </mat-slide-toggle>
     </div>
     <div class="containerTable">
         <table class="table table-hover">
 
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Nacionalidad</th>
-                    <th>F. Nacimiento</th>
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 1}" (click)="filtrarPor(1)">
+                        Nombre<span class="ml-1" *ngIf="estadoBusqueda === 1"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
+                    </th>
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 2}" (click)="filtrarPor(2)">
+                        Nacionalidad<span class="ml-1" *ngIf="estadoBusqueda === 2"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
+                    </th>
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 3}" (click)="filtrarPor(3)">
+                        F. Nacimiento<span class="ml-1" *ngIf="estadoBusqueda === 3"><fa-icon [icon]="faSortNumericDownAlt"></fa-icon></span>
+                    </th>
                     <th>Opciones</th>
                 </tr>
             </thead>

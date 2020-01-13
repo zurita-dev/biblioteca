@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { autor } from '../models/autor';
 import { AutorService } from '../services/autor.service';
+import {faGlobe,faUserTie,faBirthdayCake} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-autor-create',
@@ -13,6 +14,9 @@ export class AutorCreateComponent implements OnInit {
   title = 'Autor Nuevo';
 autor:autor;
   flagEdit:boolean = false;
+  faGlobe = faGlobe;
+  faUserTie = faUserTie;
+  faBirthdayCake = faBirthdayCake;
 
   constructor(private autorService:AutorService, public dialogRef: MatDialogRef<AutorCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) { }
