@@ -29,7 +29,7 @@ export class AutorListComponent implements OnInit {
 
   getAutores(){
     // obtengo los autores y me subscribo a los cambios
-      this.autorService.getAutores()
+      this.autorService.getAll()
       .subscribe(result => {
         // mapeo los documentos, para asignarles el id y la información propia del autor, ya que por default 
           // firebase manda los documentos con el id y la data separados, y los necesito juntos para asignarlos 
@@ -47,7 +47,7 @@ export class AutorListComponent implements OnInit {
     //  dependiendo del valor que tenga el boolean (porNacionalidad) asignado, false = por nombre, true = por nacionalidad
     // , busco lo que tenga contenido la variable (searchName), y me suscribo.
     if(this.searchName !== ''){
-      this.autorService.getAutorByPropiedad(this.searchName,this.porNacionalidad).subscribe(result => {
+      this.autorService.getItemByPropiedad(this.searchName,this.porNacionalidad).subscribe(result => {
       this.items = result;
       this.listAutor = result.map(a => {
         const data = a.payload.doc.data();
@@ -80,13 +80,10 @@ export class AutorListComponent implements OnInit {
           return {id,data}
         })
       })     
-    
-    console.log('Key presed', idCase);
-    console.log('Lista actualizada', this.listAutor);
   }
 
   deleteAutor(AutorId){
-    this.autorService.deleteAutor(AutorId).then((res) => {
+    this.autorService.deleteItem(AutorId).then((res) => {
       console.log('Borrado exitoso', res);
     },
     (err) => {

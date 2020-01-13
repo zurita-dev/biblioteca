@@ -14,40 +14,60 @@ export class AutorCreateComponent implements OnInit {
   title = 'Autor Nuevo';
 autor:autor;
   flagEdit:boolean = false;
+  //  --- FontAwesomeIcons ---
   faGlobe = faGlobe;
   faUserTie = faUserTie;
   faBirthdayCake = faBirthdayCake;
+  //  --- FontAwesomeIcons ---
 
   constructor(private autorService:AutorService, public dialogRef: MatDialogRef<AutorCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit() {
-    console.log(this.data);
+    //Revisamos que tenga id, si tiene es que es un archivo ya con datos, por lo que es una actualizacion
     if(this.data.hasOwnProperty('id')){
-      console.log('Si tiene ID');
+      // Deslindamos los datos que llegan con los que vamos a modificar , para evitar problemas con la
+      // actualizacion por referencias.
       this.autor =  JSON.parse(JSON.stringify(this.data.data));
       this.autor.anio = JSON.parse(JSON.stringify(new Date(this.autor.anio)));
       this.flagEdit= true; 
+      // Si es una actualizacion cambiamos el titulo principal
+      this.title = 'Actualizando autor';
     }else{
-      console.log('No tiene ID'); 
+      // si no tiene id , es un objeto nuevo, por lo que eliminamos las referencias, 
+      // y lo asignamos a autor para trabajar con el 
       this.autor = JSON.parse(JSON.stringify(this.data));
     }    
   }
 
   Save(){
-    this.autor.anio = JSON.parse(JSON.stringify((new Date(this.autor.anio)).getTime())); 
-    console.log('Este autor es el que se va a guardar: ', this.autor);
-    this.autorService.createAutor(this.autor).then((res)=>{
-       console.log('Éxito', res);
-    },
-    (error)=> {
-      console.log('Error: ', error);
-    })
+    if(this.verificarCamposAutor(this.autor) == true){
+      this.formatearFecha(this.autor); 
+          // se inserta el autor en la bd y esperamos el resultado.
+          this.autorService.createItem(this.autor).then((res)=>{
+            console.log('Éxito', res);
+            this.cerrarDialog();
+          },
+          (error)=> {
+            console.log('Error: ', error);
+          })
+    }else{
+      console.log('Todos los campos deben ser correctos.');
+    }
+    
+  }
+
+  verificarCamposAutor(autor:autor):boolean{
+    if(autor.nombre !== '' && autor.anio !== null && autor.nacionalidad !== '' ){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   updateAutor(){
-     this.autor.anio = JSON.parse(JSON.stringify((new Date(this.autor.anio)).getTime())); 
-    this.autorService.updateAutor(this.data.id,this.autor).then((res)=>{
+    this.formatearFecha(this.autor);
+    this.autorService.updateItem(this.data.id,this.autor).then((res)=>{
       console.log('Éxito', res);
    },
    (error)=> {
@@ -55,8 +75,13 @@ autor:autor;
    })
   }
   
-  onNoClick(): void {
+  cerrarDialog(): void {
     this.dialogRef.close();
+  }
+
+  formatearFecha(Item){
+     // La fecha la convertimos a milisegundos, ya que la guardamos de esa manera en firebase
+    this.autor.anio = JSON.parse(JSON.stringify((new Date(Item.anio)).getTime())); 
   }
 
 }
