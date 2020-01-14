@@ -10,11 +10,36 @@ body
 $primary-color-dark:   #00796B
 $primary-color:        #009688
 $primary-color-light:  #B2DFDB
-$primary-color-text:   #FFFFFF
+$primary-color-text:   rgba(255,255,255,.8)
 $accent-color:         #536DFE
 $primary-text-color:   #212121
 $secondary-text-color: #757575
 $divider-color:        #BDBDBD
+$hover-color-back:     #008e81
+.navbar
+    background-color: $primary-color
+    .navbar-collapse
+        text-align: center
+        
+     
+.navbar-light
+    .navbar-toggler
+        outline: none
+
+    .navbar-brand
+        color: $primary-color-text
+        padding: 4px 10px
+    .navbar-brand:hover
+        color: $primary-color-text
+        background-color: $hover-color-back
+    .navbar-nav 
+        .active
+            .nav-link
+                color: $primary-color-text
+            .nav-link:hover
+                background-color: $hover-color-back
+
+
 
 .ContainerDialog
     display: grid
@@ -113,6 +138,11 @@ $divider-color:        #BDBDBD
                 margin-left: 0px
                 justify-self: center
                
+@media screen and (min-width: 992px)
+    .navbar
+        display: grid
+        justify-content: space-between
+        grid-auto-flow: column
 
 
 table
