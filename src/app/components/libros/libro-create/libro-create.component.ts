@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { libro } from '../models/libro';
+import { libro, libroN } from '../models/libro';
 import {LibroService} from './../services/libro.service';
 import {faBookOpen,faBookReader,faCalendarCheck, faFont} from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LibroCreateComponent implements OnInit {
   
   title = 'Libro Nuevo';
-  libro:libro;
+  libro:libroN;
   flagEdit:boolean = false;
   listAutor: any[] = [];
   // Iconos fontawesome
