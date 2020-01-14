@@ -40,7 +40,6 @@ export class AutorListComponent implements OnInit {
           const id = a.payload.doc.id;
           return {id,data}
         })
-        console.log('pasando el map',  this.listAutor);
       })
   }
   getAutorBy(){
@@ -73,8 +72,9 @@ export class AutorListComponent implements OnInit {
   }
 
   filtrarPor(idCase){
+    // dependiendo el número que llegue en idCase , es el que mandaremos a la función del servicio autor,
     this.estadoBusqueda = idCase; 
-      this.autorService.getByFiltro(idCase,this.searchName)
+      this.autorService.getByFiltro(idCase)
       .subscribe(result => {
         this.items = result;
         this.listAutor = result.map(a => {

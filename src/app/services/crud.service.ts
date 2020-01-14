@@ -15,12 +15,13 @@ getAll(coleccion?){
   return this.db.collection(coleccion ? coleccion : this.coleccion).snapshotChanges();
 }
 
-getItemByPropiedad(cadenaABuscar,propiedad){
-
+getItemByPropiedad(cadenaABuscar,propiedad?){
+  // Buscamos coleccion por la propiedad que llega, dependiendo de la coleccion que tenemos,
+  // por el constructor del servicio, es que se asigna la propiedad.
   if(this.coleccion == 'autor'){
     propiedad == true ? propiedad = 'nacionalidad' : propiedad = 'nombre'
   }else{
-    propiedad == true ? propiedad = 'autor' : propiedad = 'titulo'
+    propiedad = 'titulo'
   }
 
   // obtenemos el documento en la coleccion que llegue como parametro (coleccion). 
@@ -30,30 +31,26 @@ getItemByPropiedad(cadenaABuscar,propiedad){
   return this.db.collection(this.coleccion,ref => ref.where(propiedad, '==', cadenaABuscar)).snapshotChanges()
 }
 
-getByFiltro(filtro,txtFiltro){
-console.log('Filtro: ',filtro, ' txtFiltro: ',txtFiltro, ' coleccion: ',this.coleccion );
-  // Los números de filtros corresponden a las opciones, 1= nombre , 2 = nacionalidad, 3 = año de nacimiento
-  // después de selecionar el filtro que corresponde, verifica si hay texto en la variable (txtFiltro) , 
-    // si existe, realiza la consulta con un where y order by, en caso de que no haya texto, solo realiza la busqueda y la ordena por el filtro.  
-  if(filtro == 1){
-    if(txtFiltro !== ''){
-      return this.db.collection(this.coleccion,ref => ref.where('nombre','==',txtFiltro).orderBy('nombre')).snapshotChanges();
-    }else{
+getByFiltro(filtro){
+  // Los números de filtros corresponden a las opciones, 1= nombre , 2 = nacionalidad,
+  //  3 = año de nacimiento/año del libro 4 = por titulo.
+
+  switch (filtro) {
+    case 1:
       return this.db.collection(this.coleccion,ref => ref.orderBy('nombre')).snapshotChanges();
-    }
-  }else if(filtro === 2){
-    if(txtFiltro !== ''){
-      return this.db.collection(this.coleccion,ref => ref.where('nombre','==',txtFiltro).orderBy('nacionalidad')).snapshotChanges();
-    }else{
+    case 2:
       return this.db.collection(this.coleccion,ref => ref.orderBy('nacionalidad')).snapshotChanges();
-    }
-  }else if(filtro === 3){
-    if(txtFiltro !== ''){
-      return this.db.collection(this.coleccion,ref => ref.where('nombre','==',txtFiltro).orderBy('anio','desc')).snapshotChanges();
-    }else{
+    case 3:
       return this.db.collection(this.coleccion,ref => ref.orderBy('anio','desc')).snapshotChanges();
-    }
-  };
+    case 4: 
+      return this.db.collection(this.coleccion,ref => ref.orderBy('titulo')).snapshotChanges();
+      // en el caso 5 lo dejaremos pendiente, pues guardamos el id de el autor, pero es alfanumerico,
+      // entonces tendriamos que realizar consulta anidada.
+
+
+    // case 5: 
+    //   return this.db.collection(this.coleccion,ref => ref.orderBy('autor','desc')).snapshotChanges();
+  }
 }
 
 
@@ -74,6 +71,7 @@ deleteItem(itemId){
 }
 
 formatearFecha(Item){
+  // damos formato a la fecha, de date a milisegundos
   Item.anio = JSON.parse(JSON.stringify((new Date(Item.anio)).getTime())); 
   return Item
 }

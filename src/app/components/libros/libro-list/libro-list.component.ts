@@ -50,7 +50,6 @@ export class LibroListComponent implements OnInit {
      const id = a.payload.doc.id;
      return {id,data}
    })
-   console.log('pasando el map',  this.listLibros);
  })
   }
 
@@ -67,16 +66,15 @@ export class LibroListComponent implements OnInit {
         const id = a.payload.doc.id;
         return {id,data}
       })
-      console.log('pasando el map - autores',  this.listAutores);
     })
      }
 
-  getAutorBy(){
+  getLibroBy(){
     // Realizo con la cadena que tenga asignada la variable (searchName) la busqueda, por Título o Autor
     //  dependiendo del valor que tenga el boolean (porAutor) asignado, false = por Título, true = por Autor
     // , busco lo que tenga contenido la variable (searchName), y me suscribo.
     if(this.searchName !== ''){
-      this.libroService.getItemByPropiedad(this.searchName,this.porAutor).subscribe(result => {
+      this.libroService.getItemByPropiedad(this.searchName).subscribe(result => {
       this.items = result;
       this.listLibros = result.map(a => {
         const data = a.payload.doc.data();
@@ -101,7 +99,7 @@ export class LibroListComponent implements OnInit {
 
   filtrarPor(idCase){
     this.estadoBusqueda = idCase; 
-      this.libroService.getByFiltro(idCase,this.searchName)
+      this.libroService.getByFiltro(idCase)
       .subscribe(result => {
         this.items = result;
         this.listLibros = result.map(a => {

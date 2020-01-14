@@ -1,5 +1,4 @@
 <div class="contenedor">
-
     <header>
         <h2>Libros</h2>
     </header>
@@ -8,14 +7,14 @@
             <input type="search" [placeholder]=placeholderSearch [(ngModel)]="searchName">
             <button mat-raised-button (click)="getLibroBy()"><i class="material-icons">search</i></button>
         </div>
-
+        <!-- 
         <mat-slide-toggle class="searchItem" (change)="busquedaxFiltro()" [checked]="porAutor">
             Autor
-        </mat-slide-toggle>
+        </mat-slide-toggle> -->
     </div>
 
 
-    <div class="containerTable">
+    <div class="containerTable containerTableLibros">
         <table class="table table-hover">
 
             <thead>
@@ -24,11 +23,11 @@
                     de esta manera podemos realizar el ordenamiento por el filtro que sea seleccinado -->
                     <!-- Se añade una clase active al th correspondiente, de acuerdo al valor seteado en la variable estadoBusqueda -->
                     <!-- Los iconos se muestran y ocultan de esa manera -->
-                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 1}" (click)="filtrarPor(1)">
-                        T&iacute;tulo<span class="ml-1" *ngIf="estadoBusqueda === 1"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 4}" (click)="filtrarPor(4)">
+                        T&iacute;tulo<span class="ml-1" *ngIf="estadoBusqueda === 4"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
                     </th>
-                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 2}" (click)="filtrarPor(2)">
-                        Autor<span class="ml-1" *ngIf="estadoBusqueda === 2"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
+                    <th>
+                        Autor
                     </th>
                     <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 3}" (click)="filtrarPor(3)">
                         año<span class="ml-1" *ngIf="estadoBusqueda === 3"><fa-icon [icon]="faSortNumericDownAlt"></fa-icon></span>
@@ -57,8 +56,5 @@
 </div>
 <!-- boton flotante  -->
 <div class="float mat-elevation-z8" (click)="dialogLibro()">
-    <!-- <i class="fa fa-plus my-float"></i> -->
-    <i class="material-icons">
-        add
-        </i>
+    <i class="material-icons">add</i>
 </div>

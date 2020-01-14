@@ -57,7 +57,6 @@ export class LibroCreateComponent implements OnInit {
         const id = a.payload.doc.id;
         return {id,data}
       })
-      console.log('pasando el map, desde libro create',  this.listAutor);
     })
   }
 
@@ -93,6 +92,7 @@ export class LibroCreateComponent implements OnInit {
   }
 
   verificarCamposLibro(libro:libro):boolean{
+    // Verificamos que el objeto sea correcto con los campos necesarios
     if(libro.titulo !== '' && libro.anio !== null && libro.autor !== '' && libro.descripcion !== '' ){
       return true;
     }else{
