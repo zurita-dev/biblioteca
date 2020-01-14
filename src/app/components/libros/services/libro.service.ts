@@ -4,46 +4,19 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { libro } from '../models/libro';
 import { mapToMapExpression } from '@angular/compiler/src/render3/util';
+import { CrudService } from 'src/app/services/crud.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class LibroService {
+export class LibroService extends CrudService{
   
-  constructor(private db: AngularFirestore) { }
-
-getLibros(){
-  //  return this.db.collection('libro').snapshotChanges().pipe(
-  //    map(actions => 
-  //     actions.map(a => {
-  //       const data = a.payload.doc.data();
-  //       const id = a.payload.doc.id;
-  //       return {id, ...data};
-  //     }))
-  //  )  
-  
-    return this.db.collection('libro').snapshotChanges();
-  
-} 
-
- //this.db.collection("libro"). get().then((querySnapshot) => {
-    // querySnapshot.forEach((doc) => {
-     //    console.log(`${doc.id} => ${doc.data()}`);
-  //   });
+  constructor(private _db: AngularFirestore) {
+    super(_db,'libro');
+  }
 
 
-newLibro(libro){
-  return this.db.collection('libro').add(libro);
-}
-
-updateLibro(libroId, libro){
-    return this.db.collection('libro').doc(libroId).set(libro);
-}
-
-deleteLibro(libroId){
-  return this.db.collection('libro').doc(libroId).delete();
-}
 
 
 getNewLibro(): libro{

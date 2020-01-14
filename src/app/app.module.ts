@@ -21,12 +21,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 // End imports material
 import { LibroCreateComponent } from './components/libros/libro-create/libro-create.component';
 import { FormsModule } from '@angular/forms';
 import { AutorCreateComponent } from './components/autor/autor-create/autor-create.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
+import { AutorPipe } from './pipes/autor.pipe';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { ToastrModule } from 'ngx-toastr';
     AutorListComponent,
     LibroCreateComponent,
     AutorCreateComponent,
+    AutorPipe,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatSelectModule,
   ],
   entryComponents: [
     LibroCreateComponent,

@@ -9,14 +9,22 @@ export class CrudService {
   // así podremos identificar con que coleccion trabajar en cada llamada a la función , y nos ahorraremos codigo.
   constructor(private db: AngularFirestore,private coleccion:string) { }
 
-getAll(){
-  // Obtiene documentos de la coleccion que llegue en parametro (coleccion). 
-  return this.db.collection(this.coleccion).snapshotChanges();
+getAll(coleccion?){
+  // Obtiene documentos de la coleccion que llegue en parametro (coleccion), si no hay elemento, toma el que
+  // Tenga asignado el constructor del servicio que llama a esta funcion- 
+  return this.db.collection(coleccion ? coleccion : this.coleccion).snapshotChanges();
 }
 
 getItemByPropiedad(cadenaABuscar,propiedad){
+
+  if(this.coleccion == 'autor'){
+    propiedad == true ? propiedad = 'nacionalidad' : propiedad = 'nombre'
+  }else{
+    propiedad == true ? propiedad = 'autor' : propiedad = 'titulo'
+  }
+
   // obtenemos el documento en la coleccion que llegue como parametro (coleccion). 
-  propiedad == true ? propiedad = 'nacionalidad' : propiedad= 'nombre'
+ 
   //propiedad es , 1 = nombre, 2 = nacionalidad  
   // Obtiene autor por nombre 
   return this.db.collection(this.coleccion,ref => ref.where(propiedad, '==', cadenaABuscar)).snapshotChanges()
@@ -49,6 +57,7 @@ console.log('Filtro: ',filtro, ' txtFiltro: ',txtFiltro, ' coleccion: ',this.col
 }
 
 
+
 createItem(Item){
   // añade documento a la coleccion que llegue como parametro en coleccion. 
   return this.db.collection(this.coleccion).add(Item);
@@ -56,12 +65,17 @@ createItem(Item){
 
 updateItem(itemId, itemActualizado){
   // Actualiza documento con el id ( itemId ), con el objeto que llega itemActualizado; 
-    return this.db.collection('autor').doc(itemId).set(itemActualizado);
+    return this.db.collection(this.coleccion).doc(itemId).set(itemActualizado);
 }
 
 deleteItem(itemId){
   // Elimina documento con el id ( itemId ),en la coleccion que llega como parametro en coleccion 
   return this.db.collection(this.coleccion).doc(itemId).delete();
+}
+
+formatearFecha(Item){
+  Item.anio = JSON.parse(JSON.stringify((new Date(Item.anio)).getTime())); 
+  return Item
 }
 
 }

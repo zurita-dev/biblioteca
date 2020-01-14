@@ -1,81 +1,64 @@
 <div class="contenedor">
 
     <header>
-        <h2>Libros List </h2> <button mat-button (click)="dialogLibro()">Agregar</button>
+        <h2>Libros</h2>
     </header>
+    <div class="search">
+        <div class="input-group searchItem">
+            <input type="search" [placeholder]=placeholderSearch [(ngModel)]="searchName">
+            <button mat-raised-button (click)="getLibroBy()"><i class="material-icons">search</i></button>
+        </div>
+
+        <mat-slide-toggle class="searchItem" (change)="busquedaxFiltro()" [checked]="porAutor">
+            Autor
+        </mat-slide-toggle>
+    </div>
 
 
-    <div class="listaLibros">
+    <div class="containerTable">
         <table class="table table-hover">
+
             <thead>
                 <tr>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Año</th>
-                    <th>Descripción</th>
+                    <!-- Las busquedas corresponden a los filtros, 1 = nombre, 2, Nacionalidad, 3 F. nacimiento
+                    de esta manera podemos realizar el ordenamiento por el filtro que sea seleccinado -->
+                    <!-- Se añade una clase active al th correspondiente, de acuerdo al valor seteado en la variable estadoBusqueda -->
+                    <!-- Los iconos se muestran y ocultan de esa manera -->
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 1}" (click)="filtrarPor(1)">
+                        T&iacute;tulo<span class="ml-1" *ngIf="estadoBusqueda === 1"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
+                    </th>
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 2}" (click)="filtrarPor(2)">
+                        Autor<span class="ml-1" *ngIf="estadoBusqueda === 2"><fa-icon [icon]="faSortAlphaDown"></fa-icon></span>
+                    </th>
+                    <th class="colFiltro" [ngClass]="{'active': estadoBusqueda == 3}" (click)="filtrarPor(3)">
+                        año<span class="ml-1" *ngIf="estadoBusqueda === 3"><fa-icon [icon]="faSortNumericDownAlt"></fa-icon></span>
+                    </th>
+                    <th class="colDescripcion">Descripci&oacute;n</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let book of listLibros">
                     <td>{{book.data.titulo}}</td>
-                    <td>{{book.data.autor}}</td>
+                    <td>{{book.data.autor | autor:listAutores}}</td>
                     <td>{{book.data.anio | date:'dd/MM/yyyy'}}</td>
                     <td>{{book.data.descripcion}}</td>
-                    <td> <button mat-raised-button (click)="dialogLibro(book)" color="primary">Edit</button>
-                        <button mat-raised-button (click)="deleteLibro(book.id)" color="warn">Delete</button></td>
+                    <td class="footer">
+                        <!-- las funciones toman el parametro que tega book -->
+
+                        <button mat-raised-button (click)="dialogLibro(book)" color="primary"><i class="material-icons">edit</i></button>
+                        <button mat-raised-button (click)="deleteLibro(book.id)" color="warn"> <i class="material-icons">delete</i></button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-
-
-
-
-
-    <!-- <div class="listaLibros">
-        <table mat-table [dataSource]="librosTemporales" class="mat-elevation-z8">
-
-            <ng-container matColumnDef="titulo">
-                <th mat-header-cell *matHeaderCellDef> T&iacute;tulo </th>
-                <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-            </ng-container>
-
-            <ng-container>
-                <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-            </ng-container>
-
-
-
-            <ng-container matColumnDef="autor">
-                <th mat-header-cell *matHeaderCellDef> Autor </th>
-                <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="anio">
-                <th mat-header-cell *matHeaderCellDef> Año </th>
-                <td mat-cell *matCellDef="let element"> {{element.anio.seconds | date:'dd/MM/yyyy' }} </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="descripcion">
-                <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
-                <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-            </ng-container>
-            <ng-container matColumnDef="">
-                <th mat-header-cell *matHeaderCellDef> Opciones </th>
-                <button mat-raised-button color="primary">Edit</button>
-                <button mat-raised-button color="warn">Delete</button>
-               
-            </ng-container>
-          
-
-
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div> -->
+</div>
+<!-- boton flotante  -->
+<div class="float mat-elevation-z8" (click)="dialogLibro()">
+    <!-- <i class="fa fa-plus my-float"></i> -->
+    <i class="material-icons">
+        add
+        </i>
 </div>
